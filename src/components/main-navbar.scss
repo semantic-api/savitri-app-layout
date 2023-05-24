@@ -1,0 +1,60 @@
+$icon-size: 1.3rem;
+
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  padding: 2rem;
+  width: 8rem;
+  height: 100vh;
+
+  @include themed() {
+    background: t(background-color-alt);
+    border-right: 1px solid t(border-color);
+  }
+
+  &__logo {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  &__routes {
+    margin-top: 2rem;
+  }
+
+  &__route {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+
+    padding: .56rem;
+    font-size: 9pt;
+    text-align: center;
+    color: #777;
+
+    :deep(.icon), :deep(svg) {
+      width: $icon-size;
+      height: $icon-size;
+    }
+  }
+
+  &__picture-container {
+    margin-top: auto;
+    border-radius: 50%;
+    overflow: hidden;
+
+    @include themed() {
+      background: t(background-color);
+      border: 1px solid t(border-color);
+    }
+  }
+
+  &__picture {
+    width: 4rem;
+    height: 4rem;
+  }
+}

@@ -1,0 +1,34 @@
+.dashboard {
+  display: flex;
+
+  &__main {
+    flex: 1;
+  }
+
+  &__content {
+    position: sticky;
+    top: 0;
+    left: 0;
+    display: flex;
+    padding: 0 2rem;
+    height: 5rem;
+    z-index: 10;
+
+    @include themed() {
+      background: t(background-color);
+      border-bottom: 1px solid t(border-color);
+    }
+  }
+
+  &__icon {
+    display: flex;
+    justify-self: center;
+    margin-right: 1rem;
+  }
+
+  &__view {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
