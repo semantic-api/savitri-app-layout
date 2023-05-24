@@ -27,4 +27,4 @@ const menuSchema = inject('menuSchema')
   </div>
 </template>
 
-<style scoped src="./dashboard.scss"></style>
+<style scoped src="./dashboard-layout.scss"></style>

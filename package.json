@@ -9,6 +9,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "exports": {
+    ".": "./src/index.js"
+  },
   "dependencies": {
     "@savitri/ui": "^0.1.108",
     "@savitri/web": "^1.2.21"
