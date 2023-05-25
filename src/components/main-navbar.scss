@@ -6,46 +6,55 @@ $icon-size: 1.3rem;
   left: 0;
   display: flex;
   flex-direction: column;
-  justify-items: center;
-  padding: 2rem;
-  width: 8rem;
+  width: 16rem;
   height: 100vh;
 
   @include themed() {
-    background: t(background-color-alt);
-    border-right: 1px solid t(border-color);
+    background: #f8f8f8;
+    // border-right: 1px solid t(border-color);
   }
 
   &__logo {
-    width: 4rem;
+    align-self: center;
+    width: 8rem;
     height: 4rem;
+    object-fit: contain;
+    margin: 2rem;
   }
 
   &__routes {
-    margin-top: 2rem;
+    padding-left: 2rem;
   }
 
   &__route {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 2px;
+    gap: 1rem;
 
-    padding: .56rem;
-    font-size: 9pt;
-    text-align: center;
+    padding: .6rem 2rem .6rem .6rem;
     color: #777;
 
     :deep(.icon), :deep(svg) {
       width: $icon-size;
       height: $icon-size;
     }
+
+    &:hover {
+      background: #e7e6eb;
+      color: #4c66fa;
+
+      :deep(svg) {
+        fill: #4c66fa;
+      }
+    }
   }
 
   &__picture-container {
-    margin-top: auto;
+    margin: auto 2rem 2rem 2rem;
     border-radius: 50%;
     overflow: hidden;
+    width: 4rem;
+    height: 4rem;
 
     @include themed() {
       background: t(background-color);

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { MenuSchema } from '@savitri/web'
+import { reactive, toRefs, onMounted } from 'vue'
 import { useNavbar } from '@savitri/web'
 import { SvIcon, SvPicture } from '@savitri/ui'
 
@@ -8,12 +9,21 @@ type Props = {
 }
 
 const props = defineProps<Props>()
+const navbarRefs = reactive({
+  routesWithChildren: [],
+  isCurrent: (...args: Parameters<Awaited<ReturnType<typeof useNavbar>>['isCurrent']>) => false
+})
 
 const {
   routesWithChildren,
   isCurrent
 
-} = await useNavbar(props)
+} = toRefs(navbarRefs)
+
+onMounted(async () => {
+  const navbar = await useNavbar(props)
+  Object.assign(navbarRefs, navbar)
+})
 </script>
 
 <template>
@@ -63,7 +73,7 @@ const {
     >
       <sv-picture
         :url="currentUser.picture?.link"
-        class="picture"
+        class="navbar__picture"
       ></sv-picture>
     </div>
   </div>

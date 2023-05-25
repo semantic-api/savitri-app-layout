@@ -20,10 +20,14 @@
     }
   }
 
-  &__icon {
+  &__view-title {
     display: flex;
     justify-self: center;
-    margin-right: 1rem;
+    gap: .6rem;
+    margin-right: 2rem;
+
+    font-weight: bold;
+    font-size: 1.2rem;
   }
 
   &__view {
