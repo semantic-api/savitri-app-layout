@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { MenuSchema } from '@savitri/web'
 import { reactive, toRefs, onMounted } from 'vue'
-import { useNavbar } from '@savitri/web'
+import { useStore, useRouter, useNavbar } from '@savitri/web'
 import { SvIcon, SvPicture } from '@savitri/ui'
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 const props = defineProps<Props>()
 const navbarRefs = reactive({
   routesWithChildren: [],
-  isCurrent: (...args: Parameters<Awaited<ReturnType<typeof useNavbar>>['isCurrent']>) => false
+  isCurrent: (..._args: Parameters<Awaited<ReturnType<typeof useNavbar>>['isCurrent']>) => false
 })
 
 const {
@@ -20,7 +20,13 @@ const {
 
 } = toRefs(navbarRefs)
 
+const router = await useRouter()
+
 onMounted(async () => {
+  // useStore('user').functions.ping(null, {
+    // skipLoading: true
+  // })
+
   const navbar = await useNavbar(props)
   Object.assign(navbarRefs, navbar)
 })
@@ -71,10 +77,10 @@ onMounted(async () => {
       class="navbar__picture-container"
       @click="$router.push('/dashboard/user/profile')"
     >
-      <sv-picture
-        :url="currentUser.picture?.link"
-        class="navbar__picture"
-      ></sv-picture>
+      <!-- <sv-picture -->
+      <!--   :url="currentUser.picture?.link" -->
+      <!--   class="navbar__picture" -->
+      <!-- ></sv-picture> -->
     </div>
   </div>
 </template>
