@@ -11,22 +11,35 @@ const menuSchema = inject('menuSchema')
     <main-navbar :schema="menuSchema"></main-navbar>
 
     <div style="position: relative; width: 100%">
-      <transition name="fade">
-        <div class="dashboard__main" :key="$route.fullPath">
-          <div class="dashboard__content">
-            <sv-icon
-              :name="viewIcon"
-              class="dashboard__view-title"
-            >
-              {{ viewTitle }}
-            </sv-icon>
-            <router-view name="topbar"></router-view>
-          </div>
-          <div class="dashboard__view">
-            <router-view></router-view>
+      <div class="dashboard__main">
+        <div class="dashboard__super">
+          <sv-icon
+            :name="viewIcon"
+            class="dashboard__view-title"
+          >
+            {{ viewTitle }}
+          </sv-icon>
+          <div class="dashboard__user">
+            <sv-picture
+              :url="currentUser.picture?.link"
+              class="dashboard__user-picture"
+            ></sv-picture>
+            <div>
+              {{ currentUser.first_name }}
+            </div>
           </div>
         </div>
-      </transition>
+
+        <transition name="fade" mode="out-in">
+          <div class="dashboard__view" :key="$route.fullPath">
+            <div v-if="$route.matched.slice(-1)[0].components.topbar" class="dashboard__topbar">
+              <router-view name="topbar"></router-view>
+            </div>
+            <router-view></router-view>
+          </div>
+        </transition>
+      </div>
+
     </div>
   </div>
 </template>
@@ -38,7 +51,7 @@ const menuSchema = inject('menuSchema')
 .fade-leave-active {
   position: absolute;
   width: 100%;
-  transition: opacity .35s ease-in-out;
+  transition: opacity .17s ease-in;
 }
 
 .fade-enter-from,

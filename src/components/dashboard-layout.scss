@@ -5,11 +5,13 @@
     flex: 1;
   }
 
-  &__content {
+  &__super {
     position: sticky;
     top: 0;
     left: 0;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 0 2rem;
     height: 5rem;
     z-index: 10;
@@ -20,6 +22,28 @@
     }
   }
 
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+  }
+
+  &__user-picture {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    overflow: hidden;
+
+    @include themed() {
+      border: 1px solid t(border-color);
+    }
+  }
+
+  &__topbar {
+    display: flex;
+    min-height: 4rem;
+  }
+
   &__view-title {
     display: flex;
     justify-self: center;
@@ -28,11 +52,16 @@
 
     font-weight: bold;
     font-size: 1.2rem;
+
+    :deep(svg) {
+      fill: #4c2ee4;
+    }
   }
 
   &__view {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.8rem;
+    padding: .8rem 2rem;
   }
 }

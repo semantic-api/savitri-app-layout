@@ -71,17 +71,6 @@ onMounted(async () => {
         </div>
       </div>
     </div>
-
-    <div
-      v-clickable
-      class="navbar__picture-container"
-      @click="$router.push('/dashboard/user/profile')"
-    >
-      <!-- <sv-picture -->
-      <!--   :url="currentUser.picture?.link" -->
-      <!--   class="navbar__picture" -->
-      <!-- ></sv-picture> -->
-    </div>
   </div>
 </template>
 
