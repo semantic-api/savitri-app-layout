@@ -21,7 +21,8 @@ watch(topbarComponent, () => {
   mo.observe(topbarElem, {
     childList: true
   })
-})
+
+}, { immediate: true })
 </script>
 
 <template>
