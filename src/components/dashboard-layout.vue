@@ -1,9 +1,27 @@
 <script setup lang="ts">
-import { inject } from 'vue'
+import { inject, ref, watch } from 'vue'
 import { SvIcon } from '@savitri/ui'
 import MainNavbar from '../components/main-navbar.vue'
 
 const menuSchema = inject('menuSchema')
+const topbarComponent = ref(null)
+const topbarVisible = ref(false)
+
+watch(topbarComponent, () => {
+  topbarVisible.value = false
+
+  const topbarElem = document.getElementById('inner-topbar')
+  const mo = new MutationObserver(() => {
+    if( topbarElem.children.length > 0 ) {
+      topbarVisible.value = true
+      mo.disconnect()
+    }
+  })
+
+  mo.observe(topbarElem, {
+    childList: true
+  })
+})
 </script>
 
 <template>
@@ -19,7 +37,11 @@ const menuSchema = inject('menuSchema')
           >
             {{ viewTitle }}
           </sv-icon>
-          <div class="dashboard__user">
+          <div
+            v-clickable
+            class="dashboard__user"
+            @click="$router.push('/dashboard/user/profile')"
+          >
             <sv-picture
               :url="currentUser.picture?.link"
               class="dashboard__user-picture"
@@ -32,8 +54,21 @@ const menuSchema = inject('menuSchema')
 
         <transition name="fade" mode="out-in">
           <div class="dashboard__view" :key="$route.fullPath">
-            <div v-if="$route.matched.slice(-1)[0].components.topbar" class="dashboard__topbar">
-              <router-view name="topbar"></router-view>
+            <div
+              id="inner-topbar"
+              :style="{
+                display: topbarVisible
+                  ? 'inherit'
+                  : 'none'
+              }"
+            >
+              <router-view name="topbar" v-slot="{ Component }">
+                <component
+                  :is="Component"
+                  ref="topbarComponent"
+                ></component>
+
+              </router-view>
             </div>
             <router-view></router-view>
           </div>
@@ -51,7 +86,7 @@ const menuSchema = inject('menuSchema')
 .fade-leave-active {
   position: absolute;
   width: 100%;
-  transition: opacity .17s ease-in;
+  transition: opacity .19s ease-in;
 }
 
 .fade-enter-from,

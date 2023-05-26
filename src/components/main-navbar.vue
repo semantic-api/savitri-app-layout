@@ -23,9 +23,9 @@ const {
 const router = await useRouter()
 
 onMounted(async () => {
-  // useStore('user').functions.ping(null, {
-    // skipLoading: true
-  // })
+  useStore('user').functions.ping(null, {
+    skipLoading: true
+  })
 
   const navbar = await useNavbar(props)
   Object.assign(navbarRefs, navbar)
@@ -40,35 +40,41 @@ onMounted(async () => {
       src="/static/logo.png"
       @click="$router.push('/dashboard')"
     />
-    <div class="navbar__routes">
+    <div class="navbar__entries">
       <div
         v-for="(entry, index) in routesWithChildren"
         :key="`entry-${index}`"
-        class="navbar-entry"
       >
-        <div
-          v-clickable
-          v-for="route in entry.children"
-          :key="route.name"
-          :class="`
-            navbar__route
-            ${isCurrent(route) && 'navbar__route--current'}
-          `"
+        <div class="navbar__entry-title">
+          {{ entry.meta.title }}
+        </div>
 
-          :title="$tc(route.meta.title || 'untitled', 2)"
-          @click="$router.push({ name: route.name })"
-        >
-          <sv-icon :name="route.meta?.icon || 'file'"></sv-icon>
-          <div>
-            <span>{{ $tc(route.meta.title || 'untitled', 2) }}</span>
-            <span v-if="route.badgeFunction">
-              ({{
-                useStore(route.badgeFunction.split('@')[0])
-                  .customGetter[route.badgeFunction.split('@')[1]]('navbar', route.badgePayload)
-              }})
-            </span>
+        <div>
+          <div
+            v-clickable
+            v-for="route in entry.children"
+            :key="route.name"
+            :class="`
+              navbar__route
+              ${isCurrent(route) && 'navbar__route--current'}
+            `"
+
+            :title="$tc(route.meta.title || 'untitled', 2)"
+            @click="$router.push({ name: route.name })"
+          >
+            <sv-icon :name="route.meta?.icon || 'file'"></sv-icon>
+            <div>
+              <span>{{ $tc(route.meta.title || 'untitled', 2) }}</span>
+              <span v-if="route.badgeFunction">
+                ({{
+                  useStore(route.badgeFunction.split('@')[0])
+                    .customGetter[route.badgeFunction.split('@')[1]]('navbar', route.badgePayload)
+                }})
+              </span>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
