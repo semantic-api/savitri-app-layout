@@ -59,9 +59,18 @@
   }
 
   &__view {
+    padding: 0 2rem 2rem 2rem;
+  }
+
+  &__view,
+  &__view-content {
     display: flex;
     flex-direction: column;
     gap: 1.8rem;
-    padding: 0 2rem 2rem 2rem;
+  }
+
+  &__view-topbar {
+    display: flex;
+    min-height: 4rem;
   }
 }
