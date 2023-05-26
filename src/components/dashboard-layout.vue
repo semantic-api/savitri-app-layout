@@ -7,29 +7,32 @@ const menuSchema = inject('menuSchema')
 const topbarComponent = ref(null)
 const topbarVisible = ref(false)
 
+let topbarObserver: MutationObserver
 watch(topbarComponent, () => {
   topbarVisible.value = false
+  topbarObserver?.disconnect()
 
   const topbarElem = document.getElementById('inner-topbar')
   if( !topbarElem ) {
     return
   }
 
-  const mo = new MutationObserver(() => {
+  if( topbarElem.children.length > 0 ) {
+    topbarVisible.value = true
+  }
+
+  topbarObserver = new MutationObserver(() => {
     if( topbarElem.children.length > 0 ) {
       topbarVisible.value = true
-      mo.disconnect()
+      topbarObserver.disconnect()
     }
   })
 
-  mo.observe(topbarElem, {
+  topbarObserver.observe(topbarElem, {
     childList: true
   })
 
-}, {
-  flush: 'post',
-  immediate: true
-})
+}, { immediate: true })
 </script>
 
 <template>
@@ -62,6 +65,7 @@ watch(topbarComponent, () => {
 
         <div class="dashboard__view">
           <div
+            v-if="$route.matched.slice(-1)[0].components.topbar"
             id="inner-topbar"
             :style="{
               display: topbarVisible
