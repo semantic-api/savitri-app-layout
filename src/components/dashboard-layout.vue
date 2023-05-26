@@ -11,6 +11,10 @@ watch(topbarComponent, () => {
   topbarVisible.value = false
 
   const topbarElem = document.getElementById('inner-topbar')
+  if( !topbarElem ) {
+    return
+  }
+
   const mo = new MutationObserver(() => {
     if( topbarElem.children.length > 0 ) {
       topbarVisible.value = true
@@ -22,7 +26,10 @@ watch(topbarComponent, () => {
     childList: true
   })
 
-}, { immediate: true })
+}, {
+  flush: 'post',
+  immediate: true
+})
 </script>
 
 <template>
