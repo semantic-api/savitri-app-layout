@@ -44,10 +44,16 @@ watch(topbarComponent, () => {
         <div class="dashboard__super">
           <sv-icon
             :name="viewIcon"
-            class="dashboard__view-title"
+            class="dashboard__super-title"
           >
             {{ viewTitle }}
           </sv-icon>
+
+          <slot
+            v-if="$slots.super"
+            name="super"
+          ></slot>
+
           <div
             v-clickable
             class="dashboard__user"

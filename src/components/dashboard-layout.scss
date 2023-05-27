@@ -9,16 +9,31 @@
     position: sticky;
     top: 0;
     left: 0;
+    height: 5rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 2rem;
+
     padding: 0 2rem;
-    height: 6rem;
     margin-bottom: 1rem;
     z-index: 10;
 
     @include themed() {
       background: t(background-color);
+    }
+  }
+
+  &__super-title {
+    display: flex;
+    justify-self: center;
+    gap: .6rem;
+    margin-right: auto;
+
+    font-weight: bold;
+    font-size: 1.2rem;
+
+    :deep(svg) {
+      fill: #4c2ee4;
     }
   }
 
@@ -42,20 +57,6 @@
   &__topbar {
     display: flex;
     min-height: 4rem;
-  }
-
-  &__view-title {
-    display: flex;
-    justify-self: center;
-    gap: .6rem;
-    margin-right: 2rem;
-
-    font-weight: bold;
-    font-size: 1.2rem;
-
-    :deep(svg) {
-      fill: #4c2ee4;
-    }
   }
 
   &__view {
