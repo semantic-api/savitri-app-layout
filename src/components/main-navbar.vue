@@ -33,14 +33,14 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="navbar">
+  <aside class="navbar no-print">
     <img
       v-clickable
       class="navbar__logo"
       src="/static/logo.png"
       @click="$router.push('/dashboard')"
     />
-    <div class="navbar__entries">
+    <nav class="navbar__entries">
       <div
         v-for="(entry, index) in routesWithChildren"
         :key="`entry-${index}`"
@@ -76,8 +76,8 @@ onMounted(async () => {
         </div>
 
       </div>
-    </div>
-  </div>
+    </nav>
+  </aside>
 </template>
 
 <style scoped src="./main-navbar.scss"></style>

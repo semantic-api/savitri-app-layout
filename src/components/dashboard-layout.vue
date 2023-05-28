@@ -90,7 +90,7 @@ watch(topbarComponent, () => {
 
           <transition name="fade" mode="out-in">
             <div
-              :key="$route.fullPath"
+              :key="$route.path"
               class="dashboard__view-content"
             >
               <router-view></router-view>
