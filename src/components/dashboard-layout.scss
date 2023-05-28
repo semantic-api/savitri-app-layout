@@ -54,11 +54,6 @@
     }
   }
 
-  &__topbar {
-    display: flex;
-    min-height: 4rem;
-  }
-
   &__view {
     padding: 0 2rem 2rem 2rem;
   }
@@ -73,5 +68,6 @@
   &__view-topbar {
     display: flex;
     min-height: 4rem;
+    width: 100%;
   }
 }

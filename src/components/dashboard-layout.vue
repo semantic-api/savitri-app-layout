@@ -69,34 +69,33 @@ watch(topbarComponent, () => {
           </div>
         </div>
 
-        <div class="dashboard__view">
+        <transition name="fade" mode="out-in">
           <div
-            v-if="$route.matched.slice(-1)[0].components.topbar"
-            id="inner-topbar"
-            :style="{
-              display: topbarVisible
-                ? 'inherit'
-                : 'none'
-            }"
-            class="dashboard__view-topbar"
+            :key="$route.path"
+            class="dashboard__view"
           >
-            <router-view name="topbar" v-slot="{ Component }">
-              <component
-                :is="Component"
-                ref="topbarComponent"
-              ></component>
-            </router-view>
-          </div>
-
-          <transition name="fade" mode="out-in">
             <div
-              :key="$route.path"
-              class="dashboard__view-content"
+              v-if="$route.matched.slice(-1)[0].components.topbar"
+              id="inner-topbar"
+              :style="{
+                display: topbarVisible
+                  ? 'inherit'
+                  : 'none'
+              }"
             >
-              <router-view></router-view>
+              <router-view name="topbar" v-slot="{ Component }">
+                <div class="dashboard__view-topbar">
+                  <component
+                    :is="Component"
+                    ref="topbarComponent"
+                  ></component>
+                </div>
+              </router-view>
             </div>
-          </transition>
-        </div>
+
+            <router-view></router-view>
+          </div>
+        </transition>
       </div>
 
     </div>
@@ -109,7 +108,7 @@ watch(topbarComponent, () => {
 .fade-enter-active,
 .fade-leave-active {
   width: 100%;
-  transition: opacity .19s ease-in;
+  transition: opacity .2s ease-in;
 }
 
 .fade-enter-from,
