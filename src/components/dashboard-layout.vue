@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { inject, ref, watch } from 'vue'
 import { SvIcon } from '@savitri/ui'
-import { useRouter } from '@savitri/web'
 import MainNavbar from '../components/main-navbar.vue'
-
-const router = await useRouter()
 
 const menuSchema = inject('menuSchema')
 const topbarVisible = ref(false)
+const topbarComponent = ref(null)
 
 let topbarObserver: MutationObserver
-watch(router.currentRoute, () => {
+watch(topbarComponent, () => {
   topbarVisible.value = false
   topbarObserver?.disconnect()
 
@@ -79,6 +77,7 @@ watch(router.currentRoute, () => {
             <div
               v-if="$route.matched.slice(-1)[0].components.topbar"
               id="inner-topbar"
+              ref="topbarComponent"
               :style="{
                 display: topbarVisible
                   ? 'inherit'
