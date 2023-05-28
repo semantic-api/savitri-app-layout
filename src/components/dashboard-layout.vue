@@ -84,12 +84,9 @@ watch(router.currentRoute, () => {
                   ? 'inherit'
                   : 'none'
               }"
+              class="dashboard__view-topbar"
             >
-              <router-view name="topbar" v-slot="{ Component }">
-                <div class="dashboard__view-topbar">
-                  <component :is="Component"></component>
-                </div>
-              </router-view>
+              <router-view name="topbar"></router-view>
             </div>
 
             <router-view></router-view>
