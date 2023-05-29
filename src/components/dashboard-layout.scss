@@ -50,6 +50,7 @@
     overflow: hidden;
 
     @include themed() {
+      background: t(background-color-alt);
       border: 1px solid t(border-color);
     }
   }
