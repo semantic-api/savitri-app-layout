@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inject, ref, watch } from 'vue'
-import { SvIcon } from '@savitri/ui'
+import { SvIcon, SvPicture } from '@savitri/ui'
 import MainNavbar from '../components/main-navbar.vue'
 
 const menuSchema = inject('menuSchema')
@@ -69,8 +69,11 @@ watch(topbarComponent, () => {
           </div>
         </div>
 
-        <!-- <transition name="fade" mode="out-in"> -->
-          <div class="dashboard__view">
+        <transition name="fade" mode="out-in">
+          <div
+            :key="$route.path"
+            class="dashboard__view"
+          >
             <div
               v-if="$route.matched.slice(-1)[0].components.topbar"
               id="inner-topbar"
@@ -87,7 +90,7 @@ watch(topbarComponent, () => {
 
             <router-view></router-view>
           </div>
-        <!-- </transition> -->
+        </transition>
       </div>
 
     </div>
