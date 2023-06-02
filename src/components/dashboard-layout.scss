@@ -32,8 +32,11 @@
     font-weight: bold;
     font-size: 1.2rem;
 
-    :deep(svg) {
-      fill: #4c2ee4;
+    @include themed() {
+      :deep(svg) {
+        fill: #4c2ee4;
+        fill: t(brand-color);
+      }
     }
   }
 
