@@ -21,6 +21,10 @@ const {
 } = toRefs(navbarRefs)
 
 const router = await useRouter()
+const push = (...args: Parameters<typeof router.push>) => {
+  window.scrollTo(0, 0)
+  router.push(...args)
+}
 
 onMounted(async () => {
   useStore('user').functions.ping(null, {
@@ -38,7 +42,7 @@ onMounted(async () => {
       v-clickable
       class="navbar__logo"
       src="/static/logo.png"
-      @click="$router.push('/dashboard')"
+      @click="push('/dashboard')"
     />
     <nav class="navbar__entries">
       <div
@@ -60,7 +64,7 @@ onMounted(async () => {
             `"
 
             :title="$tc(route.meta.title || 'untitled', 2)"
-            @click="$router.push({ name: route.name })"
+            @click="push({ name: route.name })"
           >
             <sv-icon :name="route.meta?.icon || 'file'"></sv-icon>
             <div>
