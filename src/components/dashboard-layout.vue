@@ -88,7 +88,14 @@ watch(topbarComponent, () => {
               <router-view name="topbar"></router-view>
             </div>
 
-            <router-view></router-view>
+            <router-view>
+              <template
+                v-for="slotName in Object.keys($slots)"
+                v-slot:[slotName]
+              >
+                <slot :name="slotName"></slot>
+              </template>
+            </router-view>
           </div>
         </transition>
       </div>
