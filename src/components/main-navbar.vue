@@ -69,7 +69,7 @@ onMounted(async () => {
             <sv-icon :name="route.meta?.icon || 'file'"></sv-icon>
             <div>
               <span>{{ $tc(route.meta.title || 'untitled', 2) }}</span>
-              <span v-if="route.badgeFunction">
+              <span v-if="route.badgeFunction" v-once>
                 ({{
                   useStore(route.badgeFunction.split('@')[0])
                     .customGetter[route.badgeFunction.split('@')[1]]('navbar', route.badgePayload)
