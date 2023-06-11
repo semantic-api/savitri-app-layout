@@ -46,6 +46,7 @@ onMounted(async () => {
     />
     <nav class="navbar__entries">
       <div
+        v-once
         v-for="(entry, index) in routesWithChildren"
         :key="`entry-${index}`"
       >
@@ -69,7 +70,7 @@ onMounted(async () => {
             <sv-icon :name="route.meta?.icon || 'file'"></sv-icon>
             <div>
               <span>{{ $tc(route.meta.title || 'untitled', 2) }}</span>
-              <span v-if="route.badgeFunction" v-once>
+              <span v-if="route.badgeFunction">
                 ({{
                   useStore(route.badgeFunction.split('@')[0])
                     .customGetter[route.badgeFunction.split('@')[1]]('navbar', route.badgePayload)
