@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { MenuSchema } from '@savitri/web'
-import { reactive, toRefs, onMounted } from 'vue'
+import { reactive, toRefs, onMounted, watch } from 'vue'
 import { useStore, useRouter, useNavbar } from '@savitri/web'
 import { SvIcon, SvPicture } from '@savitri/ui'
 
@@ -46,7 +46,6 @@ onMounted(async () => {
     />
     <nav class="navbar__entries">
       <div
-        v-once
         v-for="(entry, index) in routesWithChildren"
         :key="`entry-${index}`"
       >
