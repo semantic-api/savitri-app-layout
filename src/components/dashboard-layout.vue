@@ -69,10 +69,7 @@ watch(topbarComponent, () => {
           </div>
         </div>
 
-        <div
-          :key="$route.path"
-          class="dashboard__view"
-        >
+        <div class="dashboard__view">
           <div
             v-if="$route.matched.slice(-1)[0].components.topbar"
             id="inner-topbar"
