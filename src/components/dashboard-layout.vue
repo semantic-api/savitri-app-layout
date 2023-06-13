@@ -69,40 +69,36 @@ watch(topbarComponent, () => {
           </div>
         </div>
 
-        <transition name="fade" mode="out-in">
+        <div
+          :key="$route.path"
+          class="dashboard__view"
+        >
           <div
-            :key="$route.path"
-            class="dashboard__view"
+            v-if="$route.matched.slice(-1)[0].components.topbar"
+            id="inner-topbar"
+            ref="topbarComponent"
+            :style="{
+              display: topbarVisible
+                ? 'inherit'
+                : 'none'
+            }"
+            class="dashboard__view-topbar"
           >
-            <div
-              v-if="$route.matched.slice(-1)[0].components.topbar"
-              id="inner-topbar"
-              ref="topbarComponent"
-              :style="{
-                display: topbarVisible
-                  ? 'inherit'
-                  : 'none'
-              }"
-              class="dashboard__view-topbar"
-            >
-              <router-view name="topbar"></router-view>
-            </div>
-
-            <router-view></router-view>
-
-            <!-- <router-view v-slot="{ Component }"> -->
-            <!--   <component :is="Component"> -->
-            <!--     <template -->
-            <!--       v-for="slotName in Object.keys($slots)" -->
-            <!--       v-slot:[slotName] -->
-            <!--     > -->
-            <!--       <slot :name="slotName"></slot> -->
-            <!--     </template> -->
-            <!--   </component> -->
-            <!-- </router-view> -->
-
+            <router-view name="topbar"></router-view>
           </div>
-        </transition>
+
+          <router-view v-slot="{ Component }">
+            <component :is="Component">
+              <template
+                v-for="slotName in Object.keys($slots)"
+                v-slot:[slotName]
+              >
+                <slot :name="slotName"></slot>
+              </template>
+            </component>
+          </router-view>
+        </div>
+
       </div>
 
     </div>
@@ -111,15 +107,15 @@ watch(topbarComponent, () => {
 
 <style scoped src="./dashboard-layout.scss"></style>
 
-<style lang="scss">
-.fade-enter-active,
-.fade-leave-active {
-  width: 100%;
-  transition: opacity .2s ease-in;
-}
+<!-- <style lang="scss"> -->
+<!-- .fade-enter-active, -->
+<!-- .fade-leave-active { -->
+<!--   width: 100%; -->
+<!--   transition: opacity .2s ease-in; -->
+<!-- } -->
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
+<!-- .fade-enter-from, -->
+<!-- .fade-leave-to { -->
+<!--   opacity: 0; -->
+<!-- } -->
+<!-- </style> -->
