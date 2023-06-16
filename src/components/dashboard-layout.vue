@@ -49,6 +49,20 @@ watch(topbarComponent, () => {
             {{ viewTitle }}
           </sv-icon>
 
+          <div
+            v-if="$route.matched.slice(-1)[0].components.topbar"
+            id="inner-topbar"
+            ref="topbarComponent"
+            :style="{
+              display: topbarVisible
+                ? 'inherit'
+                : 'none'
+            }"
+            class="dashboard__topbar"
+          >
+            <router-view name="topbar"></router-view>
+          </div>
+
           <slot
             v-if="$slots.super"
             name="super"
@@ -70,20 +84,6 @@ watch(topbarComponent, () => {
         </div>
 
         <div class="dashboard__view">
-          <div
-            v-if="$route.matched.slice(-1)[0].components.topbar"
-            id="inner-topbar"
-            ref="topbarComponent"
-            :style="{
-              display: topbarVisible
-                ? 'inherit'
-                : 'none'
-            }"
-            class="dashboard__view-topbar"
-          >
-            <router-view name="topbar"></router-view>
-          </div>
-
           <router-view v-slot="{ Component }">
             <component :is="Component">
               <template
@@ -103,16 +103,3 @@ watch(topbarComponent, () => {
 </template>
 
 <style scoped src="./dashboard-layout.scss"></style>
-
-<!-- <style lang="scss"> -->
-<!-- .fade-enter-active, -->
-<!-- .fade-leave-active { -->
-<!--   width: 100%; -->
-<!--   transition: opacity .2s ease-in; -->
-<!-- } -->
-
-<!-- .fade-enter-from, -->
-<!-- .fade-leave-to { -->
-<!--   opacity: 0; -->
-<!-- } -->
-<!-- </style> -->
